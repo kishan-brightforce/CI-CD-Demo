@@ -26,13 +26,13 @@ jobs:
 
       - name: Build APK
         run: flutter build apk
-#
-#      - name: Deploy to Firebase
-#        uses: w9jds/firebase-action@master
-#        with:
-#          args: deploy --only hosting
-#        env:
-#          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
+      - name: Deploy to Firebase
+        run: |
+          npm install -g firebase-tools
+          firebase deploy --only hosting --token ${{ secrets.1//0gPXJdf_exGOBCgYIARAAGBASNwF-L9IrxlTAIoY837g7PTYImJJ_kuS9nVwpIiKgQ9Jb_cBeHzQhdnT6nTxYgxECeHCeMYq6xxw }}
+        env:
+          FIREBASE_TOKEN:  ${{ secrets.1//0gPXJdf_exGOBCgYIARAAGBASNwF-L9IrxlTAIoY837g7PTYImJJ_kuS9nVwpIiKgQ9Jb_cBeHzQhdnT6nTxYgxECeHCeMYq6xxw }}
 
 
 #name: "Build & Release"
