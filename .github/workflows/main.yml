@@ -40,8 +40,6 @@ jobs:
 
       - name: Upload to Google Drive
         run: |
-        # Your script to upload the APK to Google Drive using the Google Drive API
-        # Example:
           curl -X POST -L \
           -F "metadata={name:'app-release.apk', parents:['APKs']};type=application/json;charset=UTF-8" \
           -F "file=@build/app/outputs/flutter-apk/app-release.apk" \
