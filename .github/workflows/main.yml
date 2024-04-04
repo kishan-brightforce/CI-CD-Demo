@@ -45,7 +45,7 @@ jobs:
       - name: Upload APK to Drive
         uses: marketplace/actions/google-drive-upload-git-action@v1.4.0
         with:
-          service_account_credentials: ${{ path.resolve('key.json') }}
+          service_account_credentials: ./key.json
           folder_id: 'APKs'
           file_path: 'build/app/outputs/flutter-apk/app-release.apk'
 
