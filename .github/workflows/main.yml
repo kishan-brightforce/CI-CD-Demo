@@ -39,11 +39,14 @@ jobs:
             build/app/outputs/bundle/release/app-release.aab
 
       - name: Upload to Google Drive
-        uses: cirrus-actions/upload-google-drive@master
-        with:
-          serviceAccountJson: ${{ secrets.GOOGLE_DRIVE_SERVICE_ACCOUNT }}
-          source: build/app/outputs/flutter-apk/app-release.apk
-          destination: APKs/app-release.apk
+        run: |
+        # Your script to upload the APK to Google Drive using the Google Drive API
+        # Example:
+          curl -X POST -L \
+          -F "metadata={name:'app-release.apk', parents:['APKs']};type=application/json;charset=UTF-8" \
+          -F "file=@build/app/outputs/flutter-apk/app-release.apk" \
+          "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id" \
+          --header "Authorization: Bearer ${{ secrets.GOOGLE_DRIVE_ACCESS_TOKEN }}"
 
 
 #      - name: Create Release
