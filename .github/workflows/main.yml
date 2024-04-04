@@ -33,17 +33,18 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
-            name: Releases
-            path: |
-              build/app/outputs/flutter-apk/app-release.apk
-              build/app/outputs/bundle/release/app-release.aab
+          name: Releases
+          path: |
+            build/app/outputs/flutter-apk/app-release.apk
+            build/app/outputs/bundle/release/app-release.aab
 
       - name: Upload to Google Drive
-        uses: jakejarvis/google-drive-upload-action@master
+        uses: cirrus-actions/upload-google-drive@master
         with:
-          service_account_key: ${{ secrets.GOOGLE_DRIVE_SERVICE_ACCOUNT }}
-          file: build/app/outputs/flutter-apk/app-release.apk
-          folder: 'APKs'
+          serviceAccountJson: ${{ secrets.GOOGLE_DRIVE_SERVICE_ACCOUNT }}
+          source: build/app/outputs/flutter-apk/app-release.apk
+          destination: APKs/app-release.apk
+
 
 #      - name: Create Release
 #        uses: ncipollo/release-action@v1
