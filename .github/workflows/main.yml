@@ -38,15 +38,16 @@ jobs:
             build/app/outputs/flutter-apk/app-release.apk
             build/app/outputs/bundle/release/app-release.aab
 
-      - name: Upload to Google Drive
+      - name: Set up Google Drive Service Account
         run: |
-          curl_output=$(curl -X POST -L \
-          -F "metadata={name:'app-release.apk', parents:['APKs']};type=application/json;charset=UTF-8" \
-          -F "file=@build/app/outputs/flutter-apk/app-release.apk" \
-          "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id" \
-          --header "Authorization: Bearer ${{ secrets.GOOGLE_DRIVE_ACCESS_TOKEN }}" 2>&1)
-      
-          echo "$curl_output"  # Print curl output for debugging
+          echo ${{ secrets.GOOGLE_DRIVE_KEY }} | jq -r . > key.json
+
+      - name: Upload APK to Drive
+        uses: marketplace/actions/google-drive-upload-git-action@v1.4.0
+        with:
+          service_account_credentials: ${{ path.resolve('key.json') }}
+          folder_id: 'APKs'
+          file_path: 'build/app/outputs/flutter-apk/app-release.apk'
 
 
 #      - name: Create Release
