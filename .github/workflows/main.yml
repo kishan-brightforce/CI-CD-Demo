@@ -38,9 +38,17 @@ jobs:
             build/app/outputs/flutter-apk/app-release.apk
             build/app/outputs/bundle/release/app-release.aab
 
-      - name: Upload Artifacts TO Google Drive
+      - name: Build Flutter App (debug)
+        run: flutter build apk --debug
+
+      - name: Check Build Exit Code
+        run: echo $?  # Print exit code of previous command
+
+      - name: Upload APK to Drive (if build successful)
+        if: ${{ success() }}
         uses: Jumbo810/Upload_Github_Artifacts_TO_GDrive@v2.2.2
         with:
+          file_path: 'build/app/outputs/flutter-apk/app-debug.apk'
           target: "build/app/outputs/flutter-apk/app-debug.apk"
           credentials: ${{ secrets.CREDENTIALS }}
           parent_folder_id: ${{ secrets.folderId }}
