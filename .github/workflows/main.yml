@@ -44,20 +44,20 @@ jobs:
           credentials: ${{ secrets.CREDENTIALS }}
           filename: "build/app/outputs/flutter-apk/app-release.apk"
           folderId: ${{ secrets.folderId }}
-          name: "app-release.apk" # optional string
-          overwrite: "true" # optional boolean
-      - name: Make Directory Structure
-        run: |
-          mkdir -p w/x/y
-          date +%s > w/x/y/z
-      - name: Mirror Directory Structure
-        uses: adityak74/google-drive-upload-git-action@main
-        with:
-          credentials: ${{ secrets.CREDENTIALS }}
-          filename: w/x/y/z
-          folderId: ${{ secrets.folderId }}
-          overwrite: "true"
-          mirrorDirectoryStructure: "true"
+#          name: "app-release.apk" # optional string
+#          overwrite: "true" # optional boolean
+#      - name: Make Directory Structure
+#        run: |
+#          mkdir -p w/x/y
+#          date +%s > w/x/y/z
+#      - name: Mirror Directory Structure
+#        uses: adityak74/google-drive-upload-git-action@main
+#        with:
+#          credentials: ${{ secrets.CREDENTIALS }}
+#          filename: w/x/y/z
+#          folderId: ${{ secrets.folderId }}
+#          overwrite: "true"
+#          mirrorDirectoryStructure: "true"
 
 
 #      - name: Create Release
