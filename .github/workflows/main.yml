@@ -51,8 +51,7 @@ jobs:
         if: ${{ success() }}
         uses: Jumbo810/Upload_Github_Artifacts_TO_GDrive@v2.2.2
         with:
-          file_path: 'build/app/outputs/flutter-apk/app-debug.apk'
-          target: "build/app/outputs/flutter-apk/app-debug.apk"
+          target: '/home/runner/work/CI-CD-Demo/CI-CD-Demo/build/app/outputs/flutter-apk/app-debug.apk'
           credentials: ${{ secrets.CREDENTIALS }}
           parent_folder_id: ${{ secrets.folderId }}
 
