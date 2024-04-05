@@ -38,26 +38,12 @@ jobs:
             build/app/outputs/flutter-apk/app-release.apk
             build/app/outputs/bundle/release/app-release.aab
 
-      - name: Upload to gdrive
-        uses: adityak74/google-drive-upload-git-action@main
+      - name: Upload a file to Google Drive
+        uses: willo32/google-drive-upload-action@v1
         with:
+          target: build/app/outputs/flutter-apk/app-release.apk
           credentials: ${{ secrets.CREDENTIALS }}
-          filename: "build/app/outputs/flutter-apk/app-release.apk"
-          folderId: ${{ secrets.folderId }}
-          name: "build/app/outputs/flutter-apk/app-release.apk" # optional string
-          overwrite: "true" # optional boolean
-      - name: Make Directory Structure
-        run: |
-          mkdir -p w/x/y
-          date +%s > w/x/y/z
-      - name: Mirror Directory Structure
-        uses: adityak74/google-drive-upload-git-action@main
-        with:
-          credentials: ${{ secrets.CREDENTIALS }}
-          filename: w/x/y/z
-          folderId: ${{ secrets.folderId }}
-          overwrite: "true"
-          mirrorDirectoryStructure: "true"
+          parent_folder_id: ${{ secrets.FOLDERID }}
 
 
 #      - name: Create Release
