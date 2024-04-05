@@ -38,13 +38,20 @@ jobs:
             build/app/outputs/flutter-apk/app-release.apk
             build/app/outputs/bundle/release/app-release.aab
 
-      - name: Upload to gdrive
-        uses: adityak74/google-drive-upload-git-action@main
+      - name: Upload Artifacts TO Google Drive
+        uses: Jumbo810/Upload_Github_Artifacts_TO_GDrive@v2.2.2
         with:
-          credentials: ${{ secrets.CREDENTIALS }}
-          filename: "app-debug.apk"
-          artifacts: "build/app/outputs/flutter-apk/app-debug.apk"
-          folderId: ${{ secrets.folderId }}
+          target: "build/app/outputs/flutter-apk/app-debug.apk"
+          credentials: ${{ secrets.<YOUR_SERVICE_ACCOUNT_CREDENTIALS> }}
+          parent_folder_id: ${{ secrets.folderId }}
+
+#      - name: Upload to gdrive
+#        uses: adityak74/google-drive-upload-git-action@main
+#        with:
+#          credentials: ${{ secrets.CREDENTIALS }}
+#          filename: "app-debug.apk"
+#          artifacts: "build/app/outputs/flutter-apk/app-debug.apk"
+#          folderId: ${{ secrets.folderId }}
 #          name: "app-release.apk" # optional string
 #          overwrite: "true" # optional boolean
 #      - name: Make Directory Structure
