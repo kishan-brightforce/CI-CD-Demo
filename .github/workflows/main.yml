@@ -38,16 +38,26 @@ jobs:
             build/app/outputs/flutter-apk/app-release.apk
             build/app/outputs/bundle/release/app-release.aab
 
-      - name: Set up Google Drive Service Account
-        run: |
-          echo ${{ secrets.GOOGLE_DRIVE_KEY }} | jq -r . > key.json
-
-      - name: Upload APK to Drive
-        uses: marketplace/actions/google-drive-upload-git-action@v1.4.0
+      - name: Upload to gdrive
+        uses: adityak74/google-drive-upload-git-action@main
         with:
-          service_account_credentials: ./key.json
-          folder_id: 'APKs'
-          file_path: 'build/app/outputs/flutter-apk/app-release.apk'
+          credentials: ${{ secrets.CREDENTIALS }}
+          filename: "build/app/outputs/flutter-apk/app-release.apk"
+          folderId: ${{ secrets.folderId }}
+          name: "build/app/outputs/flutter-apk/app-release.apk" # optional string
+          overwrite: "true" # optional boolean
+      - name: Make Directory Structure
+        run: |
+          mkdir -p w/x/y
+          date +%s > w/x/y/z
+      - name: Mirror Directory Structure
+        uses: adityak74/google-drive-upload-git-action@main
+        with:
+          credentials: ${{ secrets.CREDENTIALS }}
+          filename: w/x/y/z
+          folderId: ${{ secrets.folderId }}
+          overwrite: "true"
+          mirrorDirectoryStructure: "true"
 
 
 #      - name: Create Release
