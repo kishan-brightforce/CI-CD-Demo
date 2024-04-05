@@ -42,7 +42,7 @@ jobs:
         uses: Jumbo810/Upload_Github_Artifacts_TO_GDrive@v2.2.2
         with:
           target: "build/app/outputs/flutter-apk/app-debug.apk"
-          credentials: ${{ secrets.<YOUR_SERVICE_ACCOUNT_CREDENTIALS> }}
+          credentials: ${{ secrets.CREDENTIALS }}
           parent_folder_id: ${{ secrets.folderId }}
 
 #      - name: Upload to gdrive
